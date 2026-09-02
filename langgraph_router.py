@@ -30,6 +30,12 @@ llm_architect = ChatOllama(model="coder-architect:latest", temperature=0.2)
 llm_reasoning = ChatOllama(model="deepseek-r1:1.5b", temperature=0.6)
 llm_vision = ChatOllama(model="moondream:latest")
 
+CAVEMAN_SYSTEM_PROMPT = """[Concise Mode / Caveman Rules Active]:
+1. Why use many words when few words do trick.
+2. NO throat-clearing, pleasantries, filler, or preamble (never say "Sure, here is...", "Certainly!").
+3. Give direct diagnosis, exact code, commands, and concrete answer immediately.
+4. Keep all code blocks, syntax, type hints, and paths 100% exact and complete."""
+
 # 1. Router Node: Classify user intent
 def route_query(state: AgentState) -> AgentState:
     if state.get("image_path"):
@@ -59,29 +65,45 @@ Category:"""
         
     return {"category": category}
 
-# 2. Worker Nodes
+# 2. Worker Nodes with Caveman optimization
 def general_worker(state: AgentState) -> AgentState:
-    res = llm_general.invoke([HumanMessage(content=state["query"])])
-    return {"response": res.content, "model_used": "llama3.2:3b (General)"}
+    messages = [
+        {"role": "system", "content": CAVEMAN_SYSTEM_PROMPT},
+        {"role": "user", "content": state["query"]}
+    ]
+    res = llm_general.invoke(messages)
+    return {"response": res.content, "model_used": "llama3.2:3b (General - Caveman)"}
 
 def quick_code_worker(state: AgentState) -> AgentState:
-    res = llm_quick_code.invoke([HumanMessage(content=state["query"])])
-    return {"response": res.content, "model_used": "qwen2.5-coder:3b (Quick Code)"}
+    messages = [
+        {"role": "system", "content": CAVEMAN_SYSTEM_PROMPT},
+        {"role": "user", "content": state["query"]}
+    ]
+    res = llm_quick_code.invoke(messages)
+    return {"response": res.content, "model_used": "qwen2.5-coder:3b (Quick Code - Caveman)"}
 
 def architect_worker(state: AgentState) -> AgentState:
-    res = llm_architect.invoke([HumanMessage(content=state["query"])])
-    return {"response": res.content, "model_used": "coder-architect:latest (Staff Architect)"}
+    messages = [
+        {"role": "system", "content": CAVEMAN_SYSTEM_PROMPT},
+        {"role": "user", "content": state["query"]}
+    ]
+    res = llm_architect.invoke(messages)
+    return {"response": res.content, "model_used": "coder-architect:latest (Staff Architect - Caveman)"}
 
 def reasoning_worker(state: AgentState) -> AgentState:
-    res = llm_reasoning.invoke([HumanMessage(content=state["query"])])
-    return {"response": res.content, "model_used": "deepseek-r1:1.5b (Deep Reasoning)"}
+    messages = [
+        {"role": "system", "content": CAVEMAN_SYSTEM_PROMPT},
+        {"role": "user", "content": state["query"]}
+    ]
+    res = llm_reasoning.invoke(messages)
+    return {"response": res.content, "model_used": "deepseek-r1:1.5b (Deep Reasoning - Caveman)"}
 
 def vision_worker(state: AgentState) -> AgentState:
-    content = [{"type": "text", "text": state["query"]}]
+    content = [{"type": "text", "text": f"{CAVEMAN_SYSTEM_PROMPT}\n\n{state['query']}"}]
     if state.get("image_path"):
         content.append({"type": "image_url", "image_url": state["image_path"]})
     res = llm_vision.invoke([HumanMessage(content=content)])
-    return {"response": res.content, "model_used": "moondream:latest (Vision)"}
+    return {"response": res.content, "model_used": "moondream:latest (Vision - Caveman)"}
 
 # 3. Conditional Routing Decision
 def decide_route(state: AgentState) -> str:
