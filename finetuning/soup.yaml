@@ -1,0 +1,24 @@
+# soup.yaml - Fine-tuning config for MakazhanAlpamys/Soup on a 6 GB GPU
+# Run with: soup train --config finetuning/soup.yaml
+
+base_model: "Qwen/Qwen2.5-Coder-3B-Instruct"
+template: "chat"
+
+training:
+  # Enable layer streaming so base weights stream from RAM to GPU one layer at a time
+  stream_layers: true
+  quantization: "4bit"         # 4-bit NF4 quantization for low VRAM
+  fp16: true                   # GTX 1660 Ti supports FP16 (do NOT use bf16)
+  batch_size: 2
+  gradient_accumulation_steps: 4
+  epochs: 3
+  learning_rate: 2.0e-4
+  max_seq_length: 1024
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  stream_source: "auto"        # Auto stream from RAM/NVMe
+  output_dir: "./finetuning/soup_output_lora"
+
+data:
+  train_file: "./finetuning/dataset_training.jsonl"

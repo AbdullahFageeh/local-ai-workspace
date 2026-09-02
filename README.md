@@ -78,6 +78,40 @@ See `TEST_REPORT.md` for the latest benchmark and execution logs.
 
 ---
 
+## 🦥 Local & Cloud Fine-Tuning Pipeline (`finetuning/`)
+
+Complete fine-tuning pipeline supporting **Soup**, **Unsloth**, and **LLaMA-Factory**:
+
+### 1. Build Training Data
+Format your custom Q&A or documentation into Alpaca & JSONL formats:
+```powershell
+python finetuning/dataset_builder.py
+```
+
+### 2. Choose Your Fine-Tuning Method:
+- **Option A: 1-Command Local Training with Soup (`MakazhanAlpamys/Soup`)**
+  - Uses Layer Streaming (`stream_layers: true`) to train on your 6 GB GTX 1660 Ti without out-of-memory errors.
+  ```powershell
+  pip install "soup-cli[train]"
+  soup train --config finetuning/soup.yaml
+  ```
+- **Option B: 1-Click Fast Cloud Training with Unsloth (`unslothai/unsloth`)**
+  - Open `finetuning/Unsloth_Finetune_Colab.ipynb` in [Google Colab](https://colab.research.google.com).
+  - Train on free T4/A100 GPUs (2–5x faster) and export directly to `.gguf`.
+- **Option C: Visual Browser Fine-Tuning with LLaMA-Factory (`hiyouga/LLaMA-Factory`)**
+  - Launch the interactive web dashboard:
+  ```powershell
+  .\finetuning\Start-LlamaFactory.ps1
+  ```
+
+### 3. Export to Local Ollama
+Import your finished `.gguf` model into Ollama with one command:
+```powershell
+.\finetuning\Export-ToOllama.ps1 -GGUFPath "path\to\model.gguf" -ModelName "my-custom-model:latest"
+```
+
+---
+
 ## 🛠️ Custom Tools & Plugins
 
 Created ready-to-use Python tool modules for Open-WebUI in your home folder:
