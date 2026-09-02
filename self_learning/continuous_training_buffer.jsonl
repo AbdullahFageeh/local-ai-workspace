@@ -1,0 +1,1 @@
+{"instruction": "Write an asynchronous HTTP fetcher in Python", "input": "", "output": "async def fetch(url): async with httpx.AsyncClient() as client: return await client.get(url)"}

@@ -78,6 +78,37 @@ See `TEST_REPORT.md` for the latest benchmark and execution logs.
 
 ---
 
+## 🔄 Automated Self-Learning & Self-Improving Engine (`self_learning/`)
+
+An autonomous self-evolution flywheel combining patterns from **Prax**, **Reflexloop**, **Miguel**, **Cogitator-AI**, **NFH**, and **Soup/Unsloth**:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│  1. CAPTURE              2. CRITIQUE              3. SYNTHESIZE        │
+│  Daily Prompts & Errors ──► Adversarial Evaluator ──► Auto-Write Tools  │
+│                                                          │             │
+│  4. CONTINUOUS FINE-TUNE                                 ▼             │
+│  Nightly Soup/Unsloth ◄──────────────────────── Auto-Sync Buffer       │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+### Core Self-Learning Modules
+1. **Experience & Critique Logger (`experience_logger.py`):**
+   - Captures real user trajectories, corrections, and tool usage to `experiences.jsonl`.
+2. **Autonomous Tool Synthesizer (`tool_generator.py`):**
+   - Automatically writes, AST-validates, and hot-loads new Python tools in `generated_tools/` when capabilities are missing.
+3. **Adversarial Evaluator & Refiner (`adversarial_refiner.py`):**
+   - Uses an isolated evaluator model (`deepseek-r1:1.5b`) to critique outputs and propose surgical prompt adjustments.
+4. **Continuous Fine-Tuning Flywheel (`continuous_learning_buffer.py`):**
+   - Aggregates verified high-quality answers into training datasets to automatically trigger periodic QLoRA fine-tuning.
+
+### Run Self-Learning Verification Suite:
+```powershell
+python test_self_learning.py
+```
+
+---
+
 ## 🦥 Local & Cloud Fine-Tuning Pipeline (`finetuning/`)
 
 Complete end-to-end fine-tuning pipeline supporting **Soup**, **Unsloth**, and **LLaMA-Factory**:

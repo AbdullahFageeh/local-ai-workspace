@@ -1,0 +1,1 @@
+{"timestamp": 1788372731.0956705, "query": "Write an asynchronous HTTP fetcher in Python", "response": "async def fetch(url): async with httpx.AsyncClient() as client: return await client.get(url)", "model_used": "qwen2.5-coder:3b", "category": "quick_code", "success": true, "correction": null}
