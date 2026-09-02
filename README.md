@@ -1,6 +1,13 @@
-# Complete Local AI Workspace & Multi-Model Ecosystem
+## 🌟 Project Release & Summary
 
-A fully offline, private, GPU-accelerated local AI ecosystem running on your machine with **Ollama**, **Open-WebUI**, **LangGraph Multi-Model Router**, **FastAPI**, and **VS Code Continue Integration**.
+**GitHub Repository:** [https://github.com/AbdullahFageeh/local-ai-workspace](https://github.com/AbdullahFageeh/local-ai-workspace)  
+**Latest Release:** [v1.0.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v1.0.0)
+
+### Key Capabilities at a Glance:
+- **Intelligent Intent-Based Routing:** Automatically classifies user prompts and routes them to the ideal model (General Chat, Quick Code, Concurrency Architecture, Logic Reasoning, or Vision).
+- **100% Offline & Private:** Zero cloud API dependencies; runs fully GPU-accelerated on a consumer 6 GB GPU.
+- **Unified Interfaces:** Connect via Browser (Open-WebUI), REST API (FastAPI), CLI Terminal, or IDE (VS Code Continue).
+- **Extensible:** Pre-packaged with Web Search, Math Solver, and HTML Web Scraper tool plugins plus local RAG knowledge bases.
 
 ---
 
