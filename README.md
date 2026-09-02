@@ -1,13 +1,26 @@
-## 🌟 Project Release & Summary
+# 🚀 Local AI Workspace & Autonomous Multi-Model Ecosystem
 
-**GitHub Repository:** [https://github.com/AbdullahFageeh/local-ai-workspace](https://github.com/AbdullahFageeh/local-ai-workspace)  
-**Latest Release:** [v1.0.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v1.0.0)
+A 100% offline, private, GPU-accelerated local AI ecosystem running on consumer hardware (GTX 1660 Ti 6GB). Features multi-model dynamic routing with **LangGraph**, OpenAI-compatible **FastAPI** backend, **Open-WebUI** browser interface, **VS Code Continue** integration, a **3-framework fine-tuning pipeline**, and an **autonomous self-learning flywheel**.
 
-### Key Capabilities at a Glance:
-- **Intelligent Intent-Based Routing:** Automatically classifies user prompts and routes them to the ideal model (General Chat, Quick Code, Concurrency Architecture, Logic Reasoning, or Vision).
-- **100% Offline & Private:** Zero cloud API dependencies; runs fully GPU-accelerated on a consumer 6 GB GPU.
-- **Unified Interfaces:** Connect via Browser (Open-WebUI), REST API (FastAPI), CLI Terminal, or IDE (VS Code Continue).
-- **Extensible:** Pre-packaged with Web Search, Math Solver, and HTML Web Scraper tool plugins plus local RAG knowledge bases.
+---
+
+## 🌟 Quick Overview & Capabilities
+
+- **Intelligent Intent-Based Routing:** Uses LangGraph to automatically classify queries and route them to specialized local models:
+  - **General Chat / Writing:** `llama3.2:3b`
+  - **Quick Coding & Syntax:** `qwen2.5-coder:3b`
+  - **Systems & Concurrency Architecture:** `coder-architect:latest` (7B)
+  - **Deep Step-by-Step Reasoning & Math:** `deepseek-r1:1.5b`
+  - **Multimodal Image Vision:** `moondream:latest`
+  - **Vector Semantic Embeddings:** `nomic-embed-text:latest`
+- **Caveman Prompt Optimization:** Squeezes out conversational filler ("Sure, here is..."), providing direct code and answers 3–4x faster with minimal token overhead.
+- **Autonomous Self-Learning Flywheel (`self_learning/`):**
+  - Logs user trajectories and corrections (`experience_logger.py`).
+  - Synthesizes and AST-validates new Python tools at runtime (`tool_generator.py`).
+  - Adversarially critiques answers using an isolated model (`adversarial_refiner.py`).
+  - Aggregates verified data for continuous fine-tuning (`continuous_learning_buffer.py`).
+- **Unified Interfaces:** Connect via Desktop Shortcut, Web Browser (Open-WebUI), REST API (FastAPI), CLI Terminal, or IDE (VS Code Continue).
+- **Multi-Framework Fine-Tuning Pipeline (`finetuning/`):** Built-in support for **Soup** (1-command local layer streaming), **Unsloth** (1-click free Google Colab), and **LLaMA-Factory** (visual browser UI).
 
 ---
 
@@ -22,174 +35,84 @@
 
 ---
 
-## 📦 Model Inventory & Modalities
+## 🚀 Getting Started in 3 Steps
 
-| Model | Modality | Size | VRAM | Optimal Use Case |
-|---|---|---|---|---|
-| **`coder-architect:latest`** | Code / Concurrency | ~4.7 GB | ~4.7 GB | Staff Engineer persona: multi-threading locks, clean typing, systems architecture |
-| **`deepseek-r1:1.5b`** | Reasoning | ~1.1 GB | ~1.5 GB | Step-by-step logic chains, math puzzles, deductive reasoning |
-| **`moondream:latest`** | Multimodal Vision | ~1.7 GB | ~2.0 GB | Image captioning, visual inspection, screenshot QA |
-| **`llama3.2:3b`** | General Chat & Router | ~2.0 GB | ~2.0 GB | Fast conversational replies, intent classification, summarization |
-| **`qwen2.5-coder:3b`** | Fast Code | ~1.9 GB | ~2.2 GB | Rapid syntax lookup, one-liner scripts, autocomplete |
-| **`nomic-embed-text:latest`** | Embeddings | ~274 MB | ~0.3 GB | High-speed document vector embedding for Open-WebUI RAG |
+### Step 1: Install & Launch Models
+Ensure Ollama is running and download the core model suite:
+```powershell
+ollama pull llama3.2:3b
+ollama pull qwen2.5-coder:3b
+ollama pull deepseek-r1:1.5b
+ollama pull moondream:latest
+ollama pull nomic-embed-text:latest
+ollama create coder-architect:latest -f Modelfile.coder_architect
+```
+
+### Step 2: Start the Web Workspace (Open-WebUI)
+Double-click the **`AI Workspace`** desktop shortcut, or run:
+```powershell
+.\Start-AIWorkspace.ps1
+```
+*Opens your browser to `http://localhost:8080` with pre-configured tools (Web Search, SymPy Calculator, URL Scraper) and RAG knowledge bases.*
+
+### Step 3: Run the Multi-Model Router API (For VS Code / Apps)
+Start the background FastAPI router:
+```powershell
+python langgraph_api.py
+```
+- **Interactive Swagger Docs:** `http://localhost:8000/docs`
+- **Native Chat Route:** `POST http://localhost:8000/chat`
+- **OpenAI-Compatible Route:** `POST http://localhost:8000/v1/chat/completions`
 
 ---
 
-## 🚀 Quick Launch Options
+## 🧪 Running Automated Tests
 
-### 1. Web Browser Interface (Open-WebUI)
-- **Desktop Shortcut:** Double-click the **`AI Workspace`** shortcut on your Desktop.
-- **PowerShell Script:**
-  ```powershell
-  .\Start-AIWorkspace.ps1
-  ```
-  *Opens browser to `http://localhost:8080` and starts the WebUI server.*
-
-### 2. Multi-Model Router API Server (FastAPI + LangGraph)
-Start the unified multi-model router endpoint:
-```powershell
-python C:\Users\abdul\langgraph_api.py
-```
-- **Interactive Swagger Docs:** `http://localhost:8000/docs`
-- **Native Endpoint:** `POST http://localhost:8000/chat`
-- **OpenAI-Compatible Endpoint:** `POST http://localhost:8000/v1/chat/completions`
-
-### 3. Run Router Direct in Terminal
-```powershell
-python C:\Users\abdul\langgraph_router.py "Design a thread-safe connection pool in Python"
-```
-
-## 🧪 Running the Automated Test Suite
-
-Contributors can verify model routing and response behavior across all 5 modalities using the built-in test suite:
-
+Run the model routing test suite:
 ```powershell
 python test_router.py
 ```
 
-### What the test suite covers:
-1. **General Chat Test:** Verifies routing to `llama3.2:3b` and checks for concise non-code output.
-2. **Quick Code Test:** Verifies routing to `qwen2.5-coder:3b` with immediate Python code snippets.
-3. **Complex Architecture Test:** Verifies routing to `coder-architect:latest` and validates `threading.Lock` concurrency implementation.
-4. **Deep Reasoning Test:** Verifies routing to `deepseek-r1:1.5b` with step-by-step logic proofs.
-5. **Multimodal Vision Test:** Creates a temporary test image and validates `moondream:latest` text extraction.
-
-See `TEST_REPORT.md` for the latest benchmark and execution logs.
-
----
-
-## 🔄 Automated Self-Learning & Self-Improving Engine (`self_learning/`)
-
-An autonomous self-evolution flywheel combining patterns from **Prax**, **Reflexloop**, **Miguel**, **Cogitator-AI**, **NFH**, and **Soup/Unsloth**:
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  1. CAPTURE              2. CRITIQUE              3. SYNTHESIZE        │
-│  Daily Prompts & Errors ──► Adversarial Evaluator ──► Auto-Write Tools  │
-│                                                          │             │
-│  4. CONTINUOUS FINE-TUNE                                 ▼             │
-│  Nightly Soup/Unsloth ◄──────────────────────── Auto-Sync Buffer       │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-### Core Self-Learning Modules
-1. **Experience & Critique Logger (`experience_logger.py`):**
-   - Captures real user trajectories, corrections, and tool usage to `experiences.jsonl`.
-2. **Autonomous Tool Synthesizer (`tool_generator.py`):**
-   - Automatically writes, AST-validates, and hot-loads new Python tools in `generated_tools/` when capabilities are missing.
-3. **Adversarial Evaluator & Refiner (`adversarial_refiner.py`):**
-   - Uses an isolated evaluator model (`deepseek-r1:1.5b`) to critique outputs and propose surgical prompt adjustments.
-4. **Continuous Fine-Tuning Flywheel (`continuous_learning_buffer.py`):**
-   - Aggregates verified high-quality answers into training datasets to automatically trigger periodic QLoRA fine-tuning.
-
-### Run Self-Learning Verification Suite:
+Run the autonomous self-learning test suite:
 ```powershell
 python test_self_learning.py
 ```
 
 ---
 
-## 🦥 Local & Cloud Fine-Tuning Pipeline (`finetuning/`)
+## 📦 Project Structure
 
-Complete end-to-end fine-tuning pipeline supporting **Soup**, **Unsloth**, and **LLaMA-Factory**:
-
-### 1. Build Training Data
-Format your custom Q&A pairs, domain documentation, or conversation logs into standard Alpaca JSON and JSONL formats:
-```powershell
-python finetuning/dataset_builder.py
-```
-*Outputs generated:* `dataset_alpaca.json` and `dataset_training.jsonl`.
-
-### 2. Choose Your Fine-Tuning Method:
-- **Option A: 1-Command Local Training with Soup (`MakazhanAlpamys/Soup`)**
-  - Uses Layer Streaming (`stream_layers: true`) to train 3B/8B models on your 6 GB GTX 1660 Ti without out-of-memory errors:
-  ```powershell
-  pip install "soup-cli[train]"
-  soup train --config finetuning/soup.yaml
-  ```
-- **Option B: 1-Click Fast Cloud Training with Unsloth (`unslothai/unsloth`)**
-  - Open `finetuning/Unsloth_Finetune_Colab.ipynb` in [Google Colab](https://colab.research.google.com).
-  - Train on free T4/A100 GPUs (2–5x faster) and export directly to `.gguf`.
-- **Option C: Visual Browser Fine-Tuning with LLaMA-Factory (`hiyouga/LLaMA-Factory`)**
-  - Launch the interactive Gradio web dashboard:
-  ```powershell
-  .\finetuning\Start-LlamaFactory.ps1
-  ```
-
-### 3. Export to Local Ollama
-Import your finished `.gguf` weights into Ollama with a single command:
-```powershell
-.\finetuning\Export-ToOllama.ps1 -GGUFPath "model_q4_k_m-unsloth.Q4_K_M.gguf" -ModelName "my-custom-finetune:latest"
+```text
+local-ai-workspace/
+├── Start-AIWorkspace.ps1        # 1-click startup script for Ollama & Open-WebUI
+├── langgraph_router.py          # LangGraph StateGraph multi-model router
+├── langgraph_api.py             # FastAPI server (native + OpenAI endpoints)
+├── test_router.py               # Model routing test suite (5 modalities)
+├── test_self_learning.py        # Master self-learning validation runner
+├── Modelfile.coder_architect    # Custom Staff Engineer persona definition
+├── tools_web_search.py          # Open-WebUI DuckDuckGo search tool
+├── tools_calculator.py          # Open-WebUI SymPy math solver tool
+├── tools_url_reader.py          # Open-WebUI web scraper tool
+├── ai_knowledge_base/           # Markdown RAG documents for dev & system ops
+├── finetuning/                  # Fine-tuning pipeline (Soup, Unsloth, LLaMA-Factory)
+│   ├── dataset_builder.py       # Converts Q&A into Alpaca & JSONL formats
+│   ├── soup.yaml                # Layer-streaming config for local 6GB GPU
+│   ├── Unsloth_Finetune_Colab.ipynb # 1-click Google Colab notebook
+│   ├── Start-LlamaFactory.ps1   # Visual browser fine-tuning dashboard
+│   └── Export-ToOllama.ps1      # Imports GGUF weights into Ollama
+├── self_learning/               # Autonomous self-improving engine
+│   ├── experience_logger.py     # Trajectory & correction logger
+│   ├── tool_generator.py        # Autonomous tool synthesis & AST validation
+│   ├── adversarial_refiner.py   # Independent evaluator & prompt refiner
+│   └── continuous_learning_buffer.py # Training buffer synchronization
+├── README.md                    # Project overview & quick start guide
+├── SELF_LEARNING_GUIDE.md       # Self-learning architecture deep dive
+├── CONTRIBUTING.md              # Contributor guidelines & setup
+└── LICENSE                      # MIT License
 ```
 
 ---
 
-## 🏁 Project Status & Completion
+## 📄 License
 
-**Status:** ✅ **Production Ready & Complete (v1.2.0)**  
-All components across Inference, Web UI, Multi-Model Routing, API Endpoints, Tools, RAG, IDE integration, and Fine-Tuning are implemented, verified, and released.
-
----
-
-## 🛠️ Custom Tools & Plugins
-
-Created ready-to-use Python tool modules for Open-WebUI in your home folder:
-- **`tools_web_search.py`:** Live DuckDuckGo web search.
-- **`tools_calculator.py`:** SymPy math and formula evaluation.
-- **`tools_url_reader.py`:** HTML web page scraper.
-
-*To activate in Open-WebUI: Go to **Workspace > Tools > "+"**, paste the file content, and click **Save**.*
-
----
-
-## 📚 Knowledge Base (RAG)
-
-Pre-built documentation stored in `C:\Users\abdul\ai_knowledge_base\`:
-- **`python_engineering_guide.md`:** Data structures, threading patterns, and complexity rules.
-- **`powershell_system_guide.md`:** Windows administrative, process, and networking reference.
-- **`ai_hardware_profile.md`:** Hardware capabilities, VRAM constraints, and local port maps.
-
-*To activate in Open-WebUI: Go to **Workspace > Knowledge > "+"**, create a collection, and upload the markdown files.*
-
----
-
-## 💻 VS Code Continue Extension Setup
-
-Configuration file is pre-configured at `C:\Users\abdul\.continue\config.json`:
-- **Chat Assistant (`Ctrl+L`):** `Local LangGraph Multi-Model Router` (`http://localhost:8000/v1`)
-- **Direct Coding:** `coder-architect:latest` (`http://localhost:11434`)
-- **Tab Autocomplete:** `qwen2.5-coder:3b`
-- **Codebase Embeddings:** `nomic-embed-text:latest`
-
----
-
-## ⚡ Performance & Reddit/Caveman Optimizations Applied
-
-- **Caveman Prompt Integration (`CAVEMAN_SYSTEM_PROMPT`):** Enforces concise responses across all 5 worker nodes. Strips conversational throat-clearing and preambles ("Sure, here is..."), generating direct code and answers 3–4x faster with minimal token overhead.
-- `OLLAMA_KEEP_ALIVE=1h`: Models stay resident in GPU memory for instantaneous follow-up prompts.
-- `OLLAMA_NUM_PARALLEL=2`: Concurrently handles dual model requests.
-- `coder-architect`: Hardcoded with `temperature 0.2` and `num_ctx 8192` for reliable, bug-free code generation.
-
-## ⚡ Performance Verification
-- 100% test pass rate across 5 modalities.
-- Verified zero preamble and minimal latency using Caveman prompt rules.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
