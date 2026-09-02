@@ -1,2 +1,4 @@
 {"query": "Write a quick reverse function in Python", "evaluation": {"verdict": "APPROVE", "flaws_detected": [], "prompt_rule_to_add": "One concise and accurate answer to the query."}}
 {"query": "Explain Python memory management in 2 sentences", "evaluation": {"verdict": "REJECT", "flaws_detected": ["reference counting is manual, cyclic is not the best term for garbage collection"], "prompt_rule_to_add": "One concise sentence to prevent this in the future."}}
+{"query": "Explain Python memory management in 2 sentences", "evaluation": {"verdict": "APPROVE", "flaws_detected": [], "prompt_rule_to_add": ""}}
+{"query": "Create a fast URL-safe Base64 encoder function in Python.", "evaluation": {"verdict": "APPROVE", "flaws_detected": [], "prompt_rule_to_add": "The function is correct and efficient for URL-safe Base64 encoding in Python."}}

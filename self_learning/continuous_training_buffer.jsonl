@@ -1,1 +1,3 @@
 {"instruction": "Write an asynchronous HTTP fetcher in Python", "input": "", "output": "async def fetch(url): async with httpx.AsyncClient() as client: return await client.get(url)"}
+{"instruction": "Write an asynchronous HTTP fetcher in Python", "input": "", "output": "async def fetch(url): async with httpx.AsyncClient() as client: return await client.get(url)"}
+{"instruction": "Create a fast URL-safe Base64 encoder function in Python.", "input": "", "output": "```python\nimport base64\n\ndef url_safe_b64encode(text: str) -> str:\n    return base64.urlsafe_b64encode(text.encode('utf-8')).decode('utf-8').rstrip('=')\n```"}
