@@ -80,17 +80,18 @@ See `TEST_REPORT.md` for the latest benchmark and execution logs.
 
 ## 🦥 Local & Cloud Fine-Tuning Pipeline (`finetuning/`)
 
-Complete fine-tuning pipeline supporting **Soup**, **Unsloth**, and **LLaMA-Factory**:
+Complete end-to-end fine-tuning pipeline supporting **Soup**, **Unsloth**, and **LLaMA-Factory**:
 
 ### 1. Build Training Data
-Format your custom Q&A or documentation into Alpaca & JSONL formats:
+Format your custom Q&A pairs, domain documentation, or conversation logs into standard Alpaca JSON and JSONL formats:
 ```powershell
 python finetuning/dataset_builder.py
 ```
+*Outputs generated:* `dataset_alpaca.json` and `dataset_training.jsonl`.
 
 ### 2. Choose Your Fine-Tuning Method:
 - **Option A: 1-Command Local Training with Soup (`MakazhanAlpamys/Soup`)**
-  - Uses Layer Streaming (`stream_layers: true`) to train on your 6 GB GTX 1660 Ti without out-of-memory errors.
+  - Uses Layer Streaming (`stream_layers: true`) to train 3B/8B models on your 6 GB GTX 1660 Ti without out-of-memory errors:
   ```powershell
   pip install "soup-cli[train]"
   soup train --config finetuning/soup.yaml
@@ -99,16 +100,23 @@ python finetuning/dataset_builder.py
   - Open `finetuning/Unsloth_Finetune_Colab.ipynb` in [Google Colab](https://colab.research.google.com).
   - Train on free T4/A100 GPUs (2–5x faster) and export directly to `.gguf`.
 - **Option C: Visual Browser Fine-Tuning with LLaMA-Factory (`hiyouga/LLaMA-Factory`)**
-  - Launch the interactive web dashboard:
+  - Launch the interactive Gradio web dashboard:
   ```powershell
   .\finetuning\Start-LlamaFactory.ps1
   ```
 
 ### 3. Export to Local Ollama
-Import your finished `.gguf` model into Ollama with one command:
+Import your finished `.gguf` weights into Ollama with a single command:
 ```powershell
-.\finetuning\Export-ToOllama.ps1 -GGUFPath "path\to\model.gguf" -ModelName "my-custom-model:latest"
+.\finetuning\Export-ToOllama.ps1 -GGUFPath "model_q4_k_m-unsloth.Q4_K_M.gguf" -ModelName "my-custom-finetune:latest"
 ```
+
+---
+
+## 🏁 Project Status & Completion
+
+**Status:** ✅ **Production Ready & Complete (v1.2.0)**  
+All components across Inference, Web UI, Multi-Model Routing, API Endpoints, Tools, RAG, IDE integration, and Fine-Tuning are implemented, verified, and released.
 
 ---
 
