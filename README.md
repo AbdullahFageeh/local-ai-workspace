@@ -24,14 +24,27 @@ A 100% offline, private, GPU-accelerated local AI ecosystem running on consumer 
 
 ---
 
-## 🖥️ System & Hardware Architecture
+## 📚 Key Documentation & Guides
 
-- **GPU:** NVIDIA GeForce GTX 1660 Ti (6 GB GDDR6 VRAM, Turing Architecture, FP16)
-- **Host OS:** Windows 11 / PowerShell 7.6.5 / Python 3.12.10
-- **Model Engine:** Ollama (GPU-accelerated, port `11434`)
-- **Web UI:** Open-WebUI (Browser chat at `http://localhost:8080`)
-- **API Server:** FastAPI + LangGraph StateGraph (Router API at `http://localhost:8000`)
-- **IDE Plugin:** VS Code Continue extension configured via `~/.continue/config.json`
+| Document | Description |
+|---|---|
+| **[`README.md`](README.md)** | High-level overview, architecture, and 3-step getting started guide. |
+| **[`SELF_LEARNING_GUIDE.md`](SELF_LEARNING_GUIDE.md)** | Deep-dive architecture guide for the 4-pillar autonomous self-learning engine. |
+| **[`LOCAL_AI_README.md`](LOCAL_AI_README.md)** | Hardware profile, port maps, VRAM budgets, and Open-WebUI setup tips. |
+| **[`ROADMAP.md`](ROADMAP.md)** | Strategic future roadmap (MCP servers, multi-agent critic pairs, and voice agents). |
+| **[`TEST_REPORT.md`](TEST_REPORT.md)** | Automated test execution logs confirming 100% test pass rates across all 5 modalities. |
+| **[`CONTRIBUTING.md`](CONTRIBUTING.md)** | Development environment setup and pull request guidelines. |
+| **[`LICENSE`](LICENSE)** | MIT Open-Source License. |
+
+---
+
+## 📦 Releases & Version Assets
+
+- **[Release v2.1.0 (Latest)](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v2.1.0):** Live self-learning interactive demo and architecture deep-dive guide.
+- **[Release v2.0.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v2.0.0):** Major release introducing the 4-pillar autonomous self-learning flywheel.
+- **[Release v1.2.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v1.2.0):** Multi-framework fine-tuning pipeline (Soup, Unsloth, LLaMA-Factory).
+- **[Release v1.1.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v1.1.0):** Caveman prompt optimization and 5-modality automated test suite.
+- **[Release v1.0.0](https://github.com/AbdullahFageeh/local-ai-workspace/releases/tag/v1.0.0):** Initial core release with Ollama, Open-WebUI, LangGraph router, and FastAPI.
 
 ---
 
@@ -66,50 +79,20 @@ python langgraph_api.py
 
 ---
 
-## 🧪 Running Automated Tests
+## 🧪 Interactive Demos & Test Commands
 
-Run the model routing test suite:
-```powershell
-python test_router.py
-```
-
-Run the autonomous self-learning test suite:
-```powershell
-python test_self_learning.py
-```
-
----
-
-## 📦 Project Structure
-
-```text
-local-ai-workspace/
-├── Start-AIWorkspace.ps1        # 1-click startup script for Ollama & Open-WebUI
-├── langgraph_router.py          # LangGraph StateGraph multi-model router
-├── langgraph_api.py             # FastAPI server (native + OpenAI endpoints)
-├── test_router.py               # Model routing test suite (5 modalities)
-├── test_self_learning.py        # Master self-learning validation runner
-├── Modelfile.coder_architect    # Custom Staff Engineer persona definition
-├── tools_web_search.py          # Open-WebUI DuckDuckGo search tool
-├── tools_calculator.py          # Open-WebUI SymPy math solver tool
-├── tools_url_reader.py          # Open-WebUI web scraper tool
-├── ai_knowledge_base/           # Markdown RAG documents for dev & system ops
-├── finetuning/                  # Fine-tuning pipeline (Soup, Unsloth, LLaMA-Factory)
-│   ├── dataset_builder.py       # Converts Q&A into Alpaca & JSONL formats
-│   ├── soup.yaml                # Layer-streaming config for local 6GB GPU
-│   ├── Unsloth_Finetune_Colab.ipynb # 1-click Google Colab notebook
-│   ├── Start-LlamaFactory.ps1   # Visual browser fine-tuning dashboard
-│   └── Export-ToOllama.ps1      # Imports GGUF weights into Ollama
-├── self_learning/               # Autonomous self-improving engine
-│   ├── experience_logger.py     # Trajectory & correction logger
-│   ├── tool_generator.py        # Autonomous tool synthesis & AST validation
-│   ├── adversarial_refiner.py   # Independent evaluator & prompt refiner
-│   └── continuous_learning_buffer.py # Training buffer synchronization
-├── README.md                    # Project overview & quick start guide
-├── SELF_LEARNING_GUIDE.md       # Self-learning architecture deep dive
-├── CONTRIBUTING.md              # Contributor guidelines & setup
-└── LICENSE                      # MIT License
-```
+- **Run Live Self-Learning Demo:**
+  ```powershell
+  python demo_self_learning.py
+  ```
+- **Run Routing Verification Test Suite:**
+  ```powershell
+  python test_router.py
+  ```
+- **Run Self-Learning Engine Tests:**
+  ```powershell
+  python test_self_learning.py
+  ```
 
 ---
 
