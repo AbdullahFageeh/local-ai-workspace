@@ -59,10 +59,22 @@ python C:\Users\abdul\langgraph_api.py
 python C:\Users\abdul\langgraph_router.py "Design a thread-safe connection pool in Python"
 ```
 
-### 4. Run Automated Test Suite
+## 🧪 Running the Automated Test Suite
+
+Contributors can verify model routing and response behavior across all 5 modalities using the built-in test suite:
+
 ```powershell
-python C:\Users\abdul\test_router.py
+python test_router.py
 ```
+
+### What the test suite covers:
+1. **General Chat Test:** Verifies routing to `llama3.2:3b` and checks for concise non-code output.
+2. **Quick Code Test:** Verifies routing to `qwen2.5-coder:3b` with immediate Python code snippets.
+3. **Complex Architecture Test:** Verifies routing to `coder-architect:latest` and validates `threading.Lock` concurrency implementation.
+4. **Deep Reasoning Test:** Verifies routing to `deepseek-r1:1.5b` with step-by-step logic proofs.
+5. **Multimodal Vision Test:** Creates a temporary test image and validates `moondream:latest` text extraction.
+
+See `TEST_REPORT.md` for the latest benchmark and execution logs.
 
 ---
 
