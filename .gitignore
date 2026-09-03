@@ -5,3 +5,7 @@ __pycache__/
 
 # Environment files
 .env
+
+# Local runtime files
+*.log
+.webui_secret_key

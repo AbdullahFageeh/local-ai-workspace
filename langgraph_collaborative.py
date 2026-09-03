@@ -7,7 +7,7 @@ Workflow:
 4. CODER: Refines the solution based on the critique.
 """
 
-from typing import TypedDict, Optional, List
+from typing import TypedDict, Optional
 from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, START, END
@@ -33,6 +33,8 @@ def search_workspace(query: str) -> str:
     """Search workspace files and knowledge base for relevant text."""
     results = []
     workspace = os.path.expanduser("~")  # Can be narrowed to a specific repo path
+    keywords = [re.escape(word) for word in query.split()[:3] if word]
+    pattern = "|".join(keywords)
     knowledge_base = os.path.join(os.path.dirname(__file__), "ai_knowledge_base")
     
     # 1. Search Knowledge Base
@@ -42,7 +44,7 @@ def search_workspace(query: str) -> str:
                 with open(os.path.join(knowledge_base, fname), 'r', encoding='utf-8') as f:
                     content = f.read()
                     # Simple keyword matching (case-insensitive)
-                    if re.search(query.split()[0:3], content, re.IGNORECASE):
+                    if pattern and re.search(pattern, content, re.IGNORECASE):
                         results.append(f"[{fname}]\n{content[:500]}...")
 
     # 2. Search Python files in workspace

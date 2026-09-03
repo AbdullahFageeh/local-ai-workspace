@@ -28,8 +28,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# API Key for unified access (loaded from .env, falls back to default if missing)
-API_KEY = os.getenv("API_KEY", "sk-FCFF1BFC5225459373715577331AC09E996680279CE35523F21A3BBD2B6E42E0")
+# API key for unified access (loaded from .env, with a local-only fallback)
+API_KEY = os.getenv("API_KEY") or "local"
 
 def verify_api_key(authorization: str = Header(None, alias="Authorization")):
     if not authorization or not authorization.startswith("Bearer "):

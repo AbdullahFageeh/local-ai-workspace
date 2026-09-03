@@ -90,7 +90,7 @@ Knowledge base reference documents have been created in `ai_knowledge_base/`:
 
 You can run the router as a background REST API server:
 ```powershell
-python C:\Users\abdul\langgraph_api.py
+python .\langgraph_api.py
 ```
 
 ### Endpoints
@@ -114,7 +114,7 @@ Configuration has been pre-written to `~/.continue/config.json`:
 
 ### How to use in VS Code:
 1. Install the **Continue** extension from the VS Code Marketplace.
-2. Ensure either `ollama` or `python C:\Users\abdul\langgraph_api.py` is running.
+2. Ensure either `ollama` or `python .\langgraph_api.py` is running.
 3. Open the Continue sidebar in VS Code (`Ctrl+L`) to chat or highlight code and press `Ctrl+I` to edit inline.
 
 ---
