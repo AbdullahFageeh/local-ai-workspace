@@ -59,26 +59,29 @@ The following custom tools have been created and packaged for Open-WebUI:
 1. **Web Search Tool (`tools_web_search.py`):** Live DuckDuckGo search for current news and technical documentation.
 2. **Calculator & Math Tool (`tools_calculator.py`):** SymPy formula, calculus, and high-precision evaluation.
 3. **URL Reader & Scraper Tool (`tools_url_reader.py`):** Extracts clean text from public web links.
+4. **Workspace Search Tool (`tools_workspace_search.py`):** Search code patterns and files across your local workspace.
+5. **Code Validator Tool (`tools_code_validator.py`):** Validate Python syntax, check type hints, and count LOC.
 
 ### How to enable tools in Open-WebUI:
 1. Start your workspace with `.\Start-AIWorkspace.ps1`.
 2. In Open-WebUI (`http://localhost:8080`), navigate to **Workspace > Tools**.
-3. Click **"+"** (Add Tool), and copy/paste the content from `tools_web_search.py`, `tools_calculator.py`, or `tools_url_reader.py`.
-4. Click **Save**. The tools will automatically be available to `llama3.2:3b` and `qwen2.5-coder:7b`.
+3. Click **"+"** (Add Tool), and copy/paste the content from any `tools_*.py` file.
+4. Click **Save**. The tools will be available to models that support function calling.
 
 ---
 
 ## 📚 Knowledge Base (RAG)
 
-Knowledge base reference documents have been created in `C:\Users\abdul\ai_knowledge_base\`:
+Knowledge base reference documents have been created in `ai_knowledge_base/`:
 - **`python_engineering_guide.md`:** Data structure complexities, threading patterns, clean code rules.
 - **`powershell_system_guide.md`:** Windows process management, network diagnostics, path handling.
 - **`ai_hardware_profile.md`:** GPU architecture limits, VRAM budgets, local port references.
+- **`copilot_coding_workflow.md`:** Root-cause debugging, narrow-edit discipline, validation-first workflow patterns.
 
 ### How to attach knowledge to all models:
 1. In Open-WebUI (`http://localhost:8080`), go to **Workspace > Knowledge**.
 2. Click **"+"** (Create Knowledge Collection) and name it (e.g., `Engineering Knowledge`).
-3. Upload or drag-and-drop the files from `C:\Users\abdul\ai_knowledge_base\`.
+3. Upload or drag-and-drop the files from `ai_knowledge_base/`.
 4. In any chat, type `#Engineering Knowledge` to ground the model's answers with these documents.
 
 ---
@@ -91,12 +94,12 @@ python C:\Users\abdul\langgraph_api.py
 ```
 
 ### Endpoints
-- **Interactive Swagger Docs:** `http://localhost:8000/docs`
-- **Native Chat Route:** `POST http://localhost:8000/chat`
+- **Interactive Swagger Docs:** `http://localhost:8001/docs`
+- **Native Chat Route:** `POST http://localhost:8001/chat`
   ```json
   {"query": "Write a thread-safe cache in Python"}
   ```
-- **OpenAI-Compatible Route:** `POST http://localhost:8000/v1/chat/completions`
+- **OpenAI-Compatible Route:** `POST http://localhost:8001/v1/chat/completions`
   - Drop-in backend for VS Code (Continue/Cline), Cursor, or external applications.
 
 ---
@@ -104,7 +107,7 @@ python C:\Users\abdul\langgraph_api.py
 ## 💻 VS Code Extension Setup (Continue / Cline)
 
 Configuration has been pre-written to `~/.continue/config.json`:
-- **Main Chat Assistant:** `Local LangGraph Multi-Model Router` (`http://localhost:8000/v1`)
+- **Main Chat Assistant:** `Local LangGraph Multi-Model Router` (`http://localhost:8001/v1`)
 - **Direct Coding:** `coder-architect:latest` (Ollama `http://localhost:11434`)
 - **Inline Tab-Autocomplete:** `qwen2.5-coder:3b`
 - **Codebase Indexing (Embeddings):** `nomic-embed-text:latest`

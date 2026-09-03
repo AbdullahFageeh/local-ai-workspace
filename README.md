@@ -73,9 +73,9 @@ Start the background FastAPI router:
 ```powershell
 python langgraph_api.py
 ```
-- **Interactive Swagger Docs:** `http://localhost:8000/docs`
-- **Native Chat Route:** `POST http://localhost:8000/chat`
-- **OpenAI-Compatible Route:** `POST http://localhost:8000/v1/chat/completions`
+- **Interactive Swagger Docs:** `http://localhost:8001/docs`
+- **Native Chat Route:** `POST http://localhost:8001/chat`
+- **OpenAI-Compatible Route:** `POST http://localhost:8001/v1/chat/completions`
 
 ---
 
