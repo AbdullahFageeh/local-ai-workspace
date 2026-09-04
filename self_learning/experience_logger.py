@@ -63,7 +63,7 @@ if __name__ == "__main__":
     log_experience(
         query="Write a quick reverse function",
         response="def rev(s): return s[::-1]",
-        model_used="qwen2.5-coder:3b",
+        model_used="coder-uncensored:7b",
         category="quick_code",
         success=True
     )

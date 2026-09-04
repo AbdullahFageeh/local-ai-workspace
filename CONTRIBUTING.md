@@ -19,11 +19,14 @@ Thank you for your interest in contributing to the Local AI Workspace & LangGrap
 
 3. **Ensure Ollama Models are Installed:**
    ```bash
-   ollama pull llama3.2:3b
-   ollama pull qwen2.5-coder:3b
-   ollama pull deepseek-r1:1.5b
+   ollama pull hf.co/HauhauCS/Qwen3.5-4B-Uncensored-HauhauCS-Aggressive:Q4_K_M
+   ollama pull hf.co/BlossomsAI/Qwen2.5-Coder-7B-Instruct-Uncensored-GGUF:Q4_K_M
+   ollama pull hf.co/mradermacher/DeepSeek-R1-Distill-Qwen-1.5B-Fully-Uncensored-GGUF:Q4_K_M
    ollama pull moondream:latest
    ollama pull nomic-embed-text:latest
+   ollama create general-uncensored:latest -f Modelfile.general_uncensored
+   ollama create coder-uncensored:7b -f Modelfile.coder_uncensored
+   ollama create reasoning-uncensored:1.5b -f Modelfile.reasoning_uncensored
    ollama create coder-architect:latest -f Modelfile.coder_architect
    ```
 

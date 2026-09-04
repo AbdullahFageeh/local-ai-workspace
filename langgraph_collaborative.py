@@ -25,7 +25,7 @@ class CollaborativeState(TypedDict):
 
 # --- Model Clients ---
 llm_coder = ChatOllama(model="coder-architect:latest", temperature=0.2)
-llm_critic = ChatOllama(model="deepseek-r1:1.5b", temperature=0.4)
+llm_critic = ChatOllama(model="reasoning-uncensored:1.5b", temperature=0.4)
 
 # --- Tools & RAG Functions ---
 
@@ -105,7 +105,7 @@ def refine_node(state: CollaborativeState) -> CollaborativeState:
         system,
         HumanMessage(content=f"Original Query: {state['query']}\n\nPrevious Draft:\n{state['draft']}\n\nCritique/Feedback:\n{state['critique']}")
     ])
-    return {"final_response": response.content, "model_used": "coder-architect + deepseek-r1 (Collaborative + RAG)"}
+    return {"final_response": response.content, "model_used": "coder-architect + reasoning-uncensored (Collaborative + RAG)"}
 
 # --- Graph Construction ---
 workflow = StateGraph(CollaborativeState)

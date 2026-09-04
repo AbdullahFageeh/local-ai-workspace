@@ -34,7 +34,7 @@ def run_live_self_learning_demo():
     exp = log_experience(
         query=user_query,
         response=simulated_response,
-        model_used="qwen2.5-coder:3b",
+        model_used="coder-uncensored:7b",
         category="quick_code",
         success=True
     )
@@ -53,7 +53,7 @@ def run_live_self_learning_demo():
 
     # Step 3: Adversarial Self-Critique & Evaluation
     print("\n[Step 3/4] ⚖️ Adversarial Critique & Evaluation (NFH Loop / Reflexloop)...")
-    print("-> Triggering independent Evaluator (deepseek-r1:1.5b)...")
+    print("-> Triggering independent Evaluator (reasoning-uncensored:1.5b)...")
     eval_res = evaluate_and_refine(query=user_query, response=simulated_response)
     print(f"-> Evaluator Verdict: [{eval_res.get('verdict', 'APPROVE')}]")
     if eval_res.get("prompt_rule_to_add"):

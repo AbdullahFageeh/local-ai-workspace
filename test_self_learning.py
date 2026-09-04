@@ -23,7 +23,7 @@ def run_self_learning_tests():
     log_experience(
         query="Write an asynchronous HTTP fetcher in Python",
         response="async def fetch(url): async with httpx.AsyncClient() as client: return await client.get(url)",
-        model_used="qwen2.5-coder:3b",
+        model_used="coder-uncensored:7b",
         category="quick_code",
         success=True
     )

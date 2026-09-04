@@ -7,10 +7,10 @@ A 100% offline, private, GPU-accelerated local AI ecosystem running on consumer 
 ## 🌟 Quick Overview & Capabilities
 
 - **Intelligent Intent-Based Routing:** Uses LangGraph to automatically classify queries and route them to specialized local models:
-  - **General Chat / Writing:** `llama3.2:3b`
-  - **Quick Coding & Syntax:** `qwen2.5-coder:3b`
+  - **General Chat / Writing:** `general-uncensored:latest`
+  - **Quick Coding & Syntax:** `coder-uncensored:7b`
   - **Systems & Concurrency Architecture:** `coder-architect:latest` (7B)
-  - **Deep Step-by-Step Reasoning & Math:** `deepseek-r1:1.5b`
+  - **Deep Step-by-Step Reasoning & Math:** `reasoning-uncensored:1.5b`
   - **Multimodal Image Vision:** `moondream:latest`
   - **Vector Semantic Embeddings:** `nomic-embed-text:latest`
 - **Caveman Prompt Optimization:** Squeezes out conversational filler ("Sure, here is..."), providing direct code and answers 3–4x faster with minimal token overhead.
@@ -53,11 +53,14 @@ A 100% offline, private, GPU-accelerated local AI ecosystem running on consumer 
 ### Step 1: Install & Launch Models
 Ensure Ollama is running and download the core model suite:
 ```powershell
-ollama pull llama3.2:3b
-ollama pull qwen2.5-coder:3b
-ollama pull deepseek-r1:1.5b
+ollama pull hf.co/HauhauCS/Qwen3.5-4B-Uncensored-HauhauCS-Aggressive:Q4_K_M
+ollama pull hf.co/BlossomsAI/Qwen2.5-Coder-7B-Instruct-Uncensored-GGUF:Q4_K_M
+ollama pull hf.co/mradermacher/DeepSeek-R1-Distill-Qwen-1.5B-Fully-Uncensored-GGUF:Q4_K_M
 ollama pull moondream:latest
 ollama pull nomic-embed-text:latest
+ollama create general-uncensored:latest -f Modelfile.general_uncensored
+ollama create coder-uncensored:7b -f Modelfile.coder_uncensored
+ollama create reasoning-uncensored:1.5b -f Modelfile.reasoning_uncensored
 ollama create coder-architect:latest -f Modelfile.coder_architect
 ```
 
