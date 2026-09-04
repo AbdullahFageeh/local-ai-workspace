@@ -1,9 +1,9 @@
 """
 Test script to verify LangGraph router delegation across all 5 specialized nodes:
-  1. General Chat (llama3.2:3b)
-  2. Quick Code (qwen2.5-coder:3b)
+  1. General Chat (general-uncensored:latest)
+  2. Quick Code (coder-uncensored:7b)
   3. Complex Architecture (coder-architect:latest)
-  4. Deep Reasoning (deepseek-r1:1.5b)
+  4. Deep Reasoning (reasoning-uncensored:1.5b)
   5. Multimodal Vision (moondream:latest)
 """
 

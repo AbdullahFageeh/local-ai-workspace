@@ -36,11 +36,10 @@ This will:
 | Model | Size | VRAM Usage | Best For |
 |---|---|---|---|
 | **`coder-architect:latest`** | ~4.7 GB | ~4.7 GB | Custom persona: Staff Engineer with automatic threading locks & strict typing |
-| **`deepseek-r1:1.5b`** | ~1.1 GB | ~1.5 GB | Deep step-by-step logic, math proofs, and deductive reasoning |
+| **`coder-uncensored:7b`** | ~4.7 GB | ~4.7 GB | Fast coding, syntax queries, lightweight scripting with uncensored base |
+| **`reasoning-uncensored:1.5b`** | ~1.1 GB | ~1.5 GB | Deep step-by-step logic, math proofs, and deductive reasoning |
 | **`moondream:latest`** | ~1.7 GB | ~2.0 GB | Multimodal Vision: Describe, analyze, and query images |
-| **`llama3.2:3b`** | ~2.0 GB | ~2.0 GB | Daily assistant, summarization, general chat |
-| **`qwen2.5-coder:3b`** | ~1.9 GB | ~2.2 GB | Fast coding, syntax queries, lightweight scripting |
-| **`qwen2.5-coder:7b`** | ~4.7 GB | ~4.7 GB | Advanced programming, complex algorithms, multi-threading |
+| **`general-uncensored:latest`** | ~3.4 GB | ~3.4 GB | Daily assistant, summarization, general chat with uncensored base |
 | **`nomic-embed-text:latest`** | ~274 MB | ~0.3 GB | High-speed document vector embedding for Open-WebUI RAG |
 
 ---
@@ -109,7 +108,7 @@ python .\langgraph_api.py
 Configuration has been pre-written to `~/.continue/config.json`:
 - **Main Chat Assistant:** `Local LangGraph Multi-Model Router` (`http://localhost:8001/v1`)
 - **Direct Coding:** `coder-architect:latest` (Ollama `http://localhost:11434`)
-- **Inline Tab-Autocomplete:** `qwen2.5-coder:3b`
+- **Inline Tab-Autocomplete:** `coder-uncensored:7b`
 - **Codebase Indexing (Embeddings):** `nomic-embed-text:latest`
 
 ### How to use in VS Code:
@@ -125,11 +124,11 @@ You can also run models directly in your terminal without the web UI:
 
 - **Interactive chat:**
   ```powershell
-  ollama run llama3.2:3b
+  ollama run general-uncensored:latest
   ```
 - **Single query:**
   ```powershell
-  ollama run qwen2.5-coder:7b "Explain how Python GIL works in 2 sentences"
+  ollama run coder-uncensored:7b "Explain how Python GIL works in 2 sentences"
   ```
 - **List installed models:**
   ```powershell

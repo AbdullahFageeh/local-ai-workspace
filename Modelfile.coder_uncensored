@@ -1,0 +1,5 @@
+FROM hf.co/BlossomsAI/Qwen2.5-Coder-7B-Instruct-Uncensored-GGUF:Q4_K_M
+
+PARAMETER temperature 0.2
+PARAMETER num_ctx 8192
+PARAMETER stop "<|im_end|>"

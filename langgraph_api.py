@@ -158,8 +158,11 @@ def list_models(auth_token: str = Depends(verify_api_key)):
         "data": [
             {"id": "langgraph-router", "object": "model", "owned_by": "local-router"},
             {"id": "langgraph-collaborative", "object": "model", "owned_by": "local-collaborative", "description": "Multi-agent: Coder + Critic pair"},
+            {"id": "general-uncensored:latest", "object": "model", "owned_by": "ollama"},
+            {"id": "coder-uncensored:7b", "object": "model", "owned_by": "ollama"},
             {"id": "coder-architect:latest", "object": "model", "owned_by": "ollama"},
-            {"id": "qwen2.5-coder:3b", "object": "model", "owned_by": "ollama"}
+            {"id": "reasoning-uncensored:1.5b", "object": "model", "owned_by": "ollama"},
+            {"id": "moondream:latest", "object": "model", "owned_by": "ollama"}
         ]
     }
 

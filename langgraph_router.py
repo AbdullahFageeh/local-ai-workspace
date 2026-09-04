@@ -1,10 +1,10 @@
 """
 LangGraph Multi-Model Router for Local Ollama Models.
 Routes user queries between:
-  - llama3.2:3b (General writing, questions, and router)
-  - qwen2.5-coder:3b (Quick syntax and short scripts)
+  - general-uncensored:latest (General writing, questions, and router)
+  - coder-uncensored:7b (Quick syntax and short scripts)
   - coder-architect:latest (Complex algorithms, systems design, multi-threading)
-  - deepseek-r1:1.5b (Deep step-by-step logic and mathematical reasoning)
+  - reasoning-uncensored:1.5b (Deep step-by-step logic and mathematical reasoning)
   - moondream:latest (Vision and image analysis)
 """
 
@@ -27,11 +27,11 @@ class AgentState(TypedDict):
     history: list  # prior conversation turns for context
 
 # Initialize Model Clients
-llm_router = ChatOllama(model="llama3.2:3b", temperature=0.0)
-llm_general = ChatOllama(model="llama3.2:3b", temperature=0.7)
-llm_quick_code = ChatOllama(model="qwen2.5-coder:3b", temperature=0.2)
+llm_router = ChatOllama(model="general-uncensored:latest", temperature=0.0)
+llm_general = ChatOllama(model="general-uncensored:latest", temperature=0.7)
+llm_quick_code = ChatOllama(model="coder-uncensored:7b", temperature=0.2)
 llm_architect = ChatOllama(model="coder-architect:latest", temperature=0.2)
-llm_reasoning = ChatOllama(model="deepseek-r1:1.5b", temperature=0.6)
+llm_reasoning = ChatOllama(model="reasoning-uncensored:1.5b", temperature=0.6)
 llm_vision = ChatOllama(model="moondream:latest")
 
 CAVEMAN_SYSTEM_PROMPT = """[Concise Mode / Caveman Rules Active]:
@@ -126,8 +126,8 @@ def general_worker(state: AgentState) -> AgentState:
     messages.append({"role": "user", "content": state["query"]})
     res = llm_general.invoke(messages)
     response = res.content
-    _log_experience(state["query"], response, "llama3.2:3b", "general")
-    return {"response": response, "model_used": "llama3.2:3b (General - Caveman)"}
+    _log_experience(state["query"], response, "general-uncensored:latest", "general")
+    return {"response": response, "model_used": "general-uncensored:latest (General - Caveman)"}
 
 def quick_code_worker(state: AgentState) -> AgentState:
     messages = [{"role": "system", "content": SYSTEM_QUICK_CODE}]
@@ -136,8 +136,8 @@ def quick_code_worker(state: AgentState) -> AgentState:
     messages.append({"role": "user", "content": state["query"]})
     res = llm_quick_code.invoke(messages)
     response = res.content
-    _log_experience(state["query"], response, "qwen2.5-coder:3b", "quick_code")
-    return {"response": response, "model_used": "qwen2.5-coder:3b (Quick Code - Caveman)"}
+    _log_experience(state["query"], response, "coder-uncensored:7b", "quick_code")
+    return {"response": response, "model_used": "coder-uncensored:7b (Quick Code - Caveman)"}
 
 def architect_worker(state: AgentState) -> AgentState:
     messages = [{"role": "system", "content": SYSTEM_ARCHITECT}]
@@ -156,8 +156,8 @@ def reasoning_worker(state: AgentState) -> AgentState:
     messages.append({"role": "user", "content": state["query"]})
     res = llm_reasoning.invoke(messages)
     response = res.content
-    _log_experience(state["query"], response, "deepseek-r1:1.5b", "reasoning")
-    return {"response": response, "model_used": "deepseek-r1:1.5b (Deep Reasoning - Caveman)"}
+    _log_experience(state["query"], response, "reasoning-uncensored:1.5b", "reasoning")
+    return {"response": response, "model_used": "reasoning-uncensored:1.5b (Deep Reasoning - Caveman)"}
 
 def vision_worker(state: AgentState) -> AgentState:
     content = [{"type": "text", "text": f"{CAVEMAN_SYSTEM_PROMPT}\n\n{state['query']}"}]

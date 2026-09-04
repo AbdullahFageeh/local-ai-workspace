@@ -1,0 +1,5 @@
+FROM hf.co/HauhauCS/Qwen3.5-4B-Uncensored-HauhauCS-Aggressive:Q4_K_M
+
+PARAMETER temperature 0.7
+PARAMETER num_ctx 8192
+PARAMETER stop "<|im_end|>"

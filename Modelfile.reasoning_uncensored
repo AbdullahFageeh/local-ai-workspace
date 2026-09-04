@@ -1,0 +1,5 @@
+FROM hf.co/mradermacher/DeepSeek-R1-Distill-Qwen-1.5B-Fully-Uncensored-GGUF:Q4_K_M
+
+PARAMETER temperature 0.6
+PARAMETER num_ctx 8192
+PARAMETER stop "<|im_end|>"

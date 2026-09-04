@@ -13,8 +13,8 @@ CRITIQUES_FILE = os.path.join(os.path.dirname(__file__), "critiques.jsonl")
 REFINEMENT_LOG = os.path.join(os.path.dirname(__file__), "prompt_refinements.jsonl")
 
 # Separate evaluator model to avoid self-evaluation bias (NFH cardinal rule)
-llm_evaluator = ChatOllama(model="deepseek-r1:1.5b", temperature=0.2)
-llm_refiner = ChatOllama(model="llama3.2:3b", temperature=0.3)
+llm_evaluator = ChatOllama(model="reasoning-uncensored:1.5b", temperature=0.2)
+llm_refiner = ChatOllama(model="general-uncensored:latest", temperature=0.3)
 
 EVALUATOR_PROMPT = """You are an Adversarial Quality Evaluator.
 Analyze the following query and the model's generated response.
