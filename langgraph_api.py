@@ -5,6 +5,7 @@ Endpoints: POST /chat, POST /v1/chat/completions, and POST /v1/completions
 
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import json
@@ -26,6 +27,14 @@ app = FastAPI(
     title="LangGraph Local Multi-Model API",
     description="Unified API routing queries between General, Quick Code, Architecture, Reasoning, and Vision local models.",
     version="1.0.0"
+)
+
+# Allow cross-origin requests (needed for web-based clients like Open-WebUI, Continue, etc.)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # API key for unified access (loaded from .env, with a local-only fallback)
@@ -143,7 +152,7 @@ def health_check():
         return {"status": "error", "ollama": str(e), "models": []}
 
 @app.get("/v1/models")
-def list_models():
+def list_models(auth_token: str = Depends(verify_api_key)):
     return {
         "object": "list",
         "data": [
@@ -172,7 +181,7 @@ def chat_endpoint(req: ChatRequest, auth_token: str = Depends(verify_api_key)):
 
 
 @app.get("/stats")
-def get_stats(flush: bool = False):
+def get_stats(flush: bool = False, auth_token: str = Depends(verify_api_key)):
     """Return self-learning statistics. Set flush=true to sync experiences to training buffer."""
     import os
     exp_file = os.path.join(os.path.dirname(__file__), "self_learning", "experiences.jsonl")
@@ -229,7 +238,7 @@ def collaborate_endpoint(req: ChatRequest, auth_token: str = Depends(verify_api_
 
 
 @app.post("/v1/completions")
-def legacy_completions(req: Dict[str, Any]):
+def legacy_completions(req: Dict[str, Any], auth_token: str = Depends(verify_api_key)):
     """Support Continue's legacy OpenAI completion endpoint."""
     try:
         user_query = _extract_prompt(req.get("prompt"))
@@ -277,7 +286,7 @@ def legacy_completions(req: Dict[str, Any]):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/v1/chat/completions")
-def openai_compatible_chat(req: OpenAIChatRequest):
+def openai_compatible_chat(req: OpenAIChatRequest, auth_token: str = Depends(verify_api_key)):
     try:
         user_query = _extract_last_user_message(req.messages)
 
